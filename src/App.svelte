@@ -1,6 +1,17 @@
 <script lang="ts">
-  import Counter from './lib/Counter.svelte'
   import Card from './lib/Card.svelte'
+    import type { MaterialItem } from './lib/material-iteam';
+
+
+  let itemA : MaterialItem = {
+      displayName: "A",
+      emmision: 0,
+  };
+
+  let itemB : MaterialItem = {
+      displayName: "B",
+      emmision: 0,
+  }
 </script>
 
 <main>
@@ -8,16 +19,22 @@
   </div>
   <h1>Testing Carbon Rank!</h1>
 
-  <div class="card">
-    <Card />
-    <Card />
+  <div class="cards">
+      <Card item={itemA} />
+      <Card item={itemB} />
   </div>
 
 </main>
 
 <style>
-    .card {
+
+    main {
+        width: 100%;
+    }
+    .cards {
         display: flex;
-        gap: 2em;
+        justify-content: space-evenly;
+        gap: 1em;
+        width: 100%;
     }
 </style>
