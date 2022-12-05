@@ -14,10 +14,10 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                {item.displayName}
+                <h4>{item.emmision}</h4>
             </div>
             <div class="flip-card-back">
-                Back
+                <h4>{item.displayName}</h4>
             </div>
         </div>
     </div>
@@ -37,10 +37,12 @@
     }
 
     .flip-card-inner {
-        position: relative;
         width: 100%;
         height: 100%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         transition: transform 0.6s;
         transform-style: preserve-3d;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

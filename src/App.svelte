@@ -1,35 +1,38 @@
 <script lang="ts">
   import Card from './lib/Card.svelte'
-    import type { MaterialItem } from './lib/material-iteam';
+    import { Game, GameState } from './lib/game';
+    import type { MaterialItem } from './lib/material-item';
 
+    const game = new Game()
 
-  let itemA : MaterialItem = {
-      displayName: "A",
-      emmision: 0,
-  };
+    let itemA : MaterialItem, itemB : MaterialItem
 
-  let itemB : MaterialItem = {
-      displayName: "B",
-      emmision: 0,
+  let state : GameState = GameState.NotStarted;
+  const next = () => {
+    [itemA, itemB, state] = game.getnextPair();
   }
+
 </script>
 
 <main>
-  <div>
-  </div>
-  <h1>Testing Carbon Rank!</h1>
-
-  <div class="cards">
-      <Card item={itemA} />
-      <Card item={itemB} />
-  </div>
-
+  {#if state == GameState.NotStarted }
+    <h1>Testing Carbon Rank!</h1>
+      <button on:click="{next}">Start</button>
+  {:else if state == GameState.Playing}
+      <div class="cards">
+          <Card on:click="{() => game.submitAnswer(itemA, itemB)}" item={itemA} />
+          <Card on:click="{() => game.submitAnswer(itemB, itemA)}" item={itemB} />
+      </div>
+      <button on:click="{next}">Next</button>
+  {:else if state == GameState.Finished}
+      <h1>Total score: {game.points}!</h1>
+  {/if}
 </main>
 
 <style>
 
     main {
-        width: 100%;
+        width: 80vw;
     }
     .cards {
         display: flex;
