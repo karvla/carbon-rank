@@ -1,4 +1,3 @@
-import { bind } from "svelte/internal";
 import type { MaterialItem } from "./material-item";
 
 export enum GameState {
@@ -11,13 +10,11 @@ export class Game {
 
     public points = 0;
     n_rounds_left = 3;
-    items : MaterialItem[] = [...Array(this.n_rounds_left * 2)].map((_, i) => {
-        return {
-            displayName: `Item ${i}`,
-            emmision: Math.floor(Math.random() * 10),
-        }
+    items: MaterialItem[];
 
-    })
+    public  set quizItems(items : MaterialItem[]) {
+        this.items = items;
+    }
 
     state : GameState = GameState.NotStarted;
 
@@ -47,8 +44,8 @@ export class Game {
     }
 
     public submitAnswer(bigger : MaterialItem, smaller : MaterialItem)  {
-        console.log(bigger.emmision, smaller.emmision);
-        if (bigger.emmision > smaller.emmision) {
+        console.log(bigger.lifeCycle10y, smaller.lifeCycle10y);
+        if (bigger.lifeCycle10y > smaller.lifeCycle10y) {
             this.points++
         }
 

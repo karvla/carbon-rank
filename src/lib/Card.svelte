@@ -1,23 +1,29 @@
 <script lang="ts">
-    import type { MaterialItem } from "./material-iteam";
+    import type { MaterialItem } from "./material-item";
 
   export let item : MaterialItem = {
-      displayName: "",
-      emmision: 0,
-  };
+       category: undefined,
+       productName: undefined,
+       production: undefined,
+       transportDistanceKm: undefined,
+       maintenance: undefined,
+       liquidate: undefined,
+       lifeCycle10y: undefined,
+       lifeCycle70y: undefined
+   };
 
-    let flipped = true;
+    export let flipped = false;
 
 </script>
 
-<main class:flipped on:click="{() => flipped = !flipped}">
+<main class:flipped >
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <h4>{item.emmision}</h4>
+                <h4>{item.productName}</h4>
             </div>
             <div class="flip-card-back">
-                <h4>{item.displayName}</h4>
+                <h4>{item.lifeCycle10y}</h4>
             </div>
         </div>
     </div>
@@ -25,7 +31,7 @@
 
 <style>
     main {
-        flex: 0 0 50%;
+        width: 20em;
     }
     /* Flip card toggle */
     .flip-card {
